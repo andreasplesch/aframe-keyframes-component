@@ -17,14 +17,18 @@ Could listen to 'animationend' and then emit next begin event.
 
 reuse a single a-animation ?
 
-addlistener('animationend', 
+parent.addlistener('animationend', 
 a-animationnode.setup nextframe toValue duration
 emit('nextFrame')
-
 )
 
+it looks like it is necessary to clone the animation node, set it up for the next frame, and then replace the current one with the clone.
+Replacing with trigger the next frame, so a begin event is not necessary.
 
+https://glitch.com/edit/#!/holy-word?path=index.html:48:29
 ### API
+
+
 
 | Property | Description | Default Value |
 | -------- | ----------- | ------------- |
