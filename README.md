@@ -10,8 +10,18 @@ For [A-Frame](https://aframe.io).
 ### Design
 
 Use built-in a-animation node.
+
 Generate children with delays or use begin events.
-Could listen to 'animationend' and then emit next begin event
+
+Could listen to 'animationend' and then emit next begin event.
+
+reuse a single a-animation ?
+
+addlistener('animationend', 
+a-animationnode.setup nextframe toValue duration
+emit('nextFrame')
+
+)
 
 
 ### API
