@@ -26,6 +26,14 @@ it looks like it is necessary to clone the animation node, set it up for the nex
 Replacing with trigger the next frame, so a begin event is not necessary.
 
 https://glitch.com/edit/#!/holy-word?path=index.html:48:29
+
+all of the a-animation attributes as string properties plus
+- keys: array, monotonically increasing 0 to 1 keys
+- duration: total duration
+- alternatively durations: array
+- values: array of tos
+
+
 ### API
 
 
