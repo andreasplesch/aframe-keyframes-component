@@ -27,6 +27,15 @@ Replacing with trigger the next frame, so a begin event is not necessary.
 
 https://glitch.com/edit/#!/holy-word?path=index.html:48:29
 
+new design:
+
+- use custom interpolation for tween
+- listen to animationstart
+- stop tween immediately, modify tween with to array and custom interpolation function with keys
+- start tween
+https://glitch.com/edit/#!/adorable-knee?path=index.html:52:40
+arrays work !
+
 all of the a-animation attributes as string properties plus
 - keys: array, monotonically increasing 0 to 1 keys
 - duration: total duration
