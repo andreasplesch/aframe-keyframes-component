@@ -12,10 +12,19 @@
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
       </a-assets>
 
-      <a-text value="Hello, A-Frame!" color="#BBB" position="-0.9 0.2 -3" scale="1.5 1.5 1.5"></a-text>
-      <a-text value="keyframes" keyframes__pos="attribute: position; delay: 500; to: 0 1 -3, -2 0.2 -2; dur: 10000" keyframes__scale="attribute: scale; delay: 500; to: 2 2 2, 1 1 1; dur: 10000" color="#BBB" position="-1.9 0.4 -3" scale="1.5 1.5 1.5">
+      <a-text value="Hello, A-Frame!" color="#BBB" position="-0.9 0.2 -3" scale="1.5 1.5 1.5">
+        <!--a-animation attribute='color' delay='1000' to='#F22' dur='5000'></a-animation-->
       </a-text>
-      <a-text value="start" keyframes="attribute: color; delay: 1000; from: #BBB; to: #F00, #00F, #FFC65D; dur: 5000" color="#BBB" position="-1.9 0.4 -3" scale="1.5 1.5 1.5">
+      <a-text value="keyframes" keyframes__pos="repeat: 2; interpolation: catmullrom; attribute: position; delay: 500; to: 0 1 -3, -1 0.2 -2, -1.9 0.8 -3; dur: 10000" 
+              keyframes__scale="repeat: 2; attribute: scale; delay: 500; to: 3 3 3, 1.5 3.5 3.5, 1.5 1.5 1.5; dur: 10000"
+              color="#BBB" position="-1.9 0.8 -3" scale="1.5 1.5 1.5">
+      </a-text>
+      <a-text value="start" keyframes="repeat: 0; attribute: color; delay: 1000; from: #BBB; to: #F00, #00F, #FFC65D; dur: 5000" color="#BBB" position="-1.9 0.4 -3" scale="1.5 1.5 1.5">
+      </a-text>
+      <a-text value="start" 
+              keyframes="repeat: 2; attribute: position; delay: 1000; 
+                         to: -3.9 0.4 -3, -2.9 1.9 -3;
+                         keys: 0, 0.1, 1; dur: 10000" color="#BBB" position="-1.9 0.4 -3" scale="1.5 1.5 1.5">
       </a-text>
       <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
       <a-light type="ambient" color="#445451"></a-light>
