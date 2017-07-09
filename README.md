@@ -9,7 +9,7 @@
 
 Requirements:
 
-- use built-in a-animation node to avoid additional dependancies.
+- use built-in a-animation node to avoid additional dependencies.
 
 old design:
 https://glitch.com/edit/#!/holy-word?path=index.html:48:29
