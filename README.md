@@ -31,7 +31,7 @@ all of the a-animation attributes as string properties to transfer plus
 
 The keyframes component animates a target property of another component of the entity, in much the same way as the ```a-animation``` element. In fact, its implementation reuses the ```a-animation``` element. Apart from providing a component interface to animation, the main motivation for the keyframes component is the ability to define multiple frames for an animation sequence where each frame is tied to a timing key. The timing keys define the relative speed of the animation as it progresses from frame to frame.
 
-As background it is helpful to understand that the keyframes component is strongly inspired the [X3D Interpolation component](http://www.web3d.org/documents/specifications/19775-1/V3.3/Part01/components/interp.html) which uses keys and keyValues as a key (;)) component.
+As background it is helpful to understand that the keyframes component is strongly inspired the [X3D Interpolation component](http://www.web3d.org/documents/specifications/19775-1/V3.3/Part01/components/interp.html) which uses keys and keyValues as a (waitforit) key ( ;) ) component.
 
 Here are a few (untested) examples:
 ```
@@ -109,7 +109,7 @@ keys: Each key in the keys is a relative time when a corresponding ```to``` valu
 
 interpolation: By default interpolation between frames is linear, eg. a straight line in the case of coordinate interpolation. However, it can be convenient to and TWEEN does allow other types of interpolation ([TWEEN](https://github.com/tweenjs/tween.js/blob/master/docs/user_guide.md#tweening-to-arrays-of-values)). For example, a CatmullRom interpolation will provide smoothed corners in the case of coordinate interpolation. Another potential use is slerp for rotations which is a TODO.
 
-Multiple properties can be animated by giving the entity multiple keyframes component. AFRAME supports this case but requires a `__suffix` to be added to each keyframes component instance attribute name, for example `keyframes__color`. 
+Multiple properties can be animated by giving the entity multiple keyframes components. AFRAME supports this case but requires a `__suffix` to be added to each keyframes component instance attribute name, for example `keyframes__color`. 
 
 ### Installation
 
