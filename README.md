@@ -88,10 +88,24 @@ Also see: https://aframe.io/docs/0.6.0/core/animations.html#attributes
 | from |	Starting value. CUrrently required for color animation. |	Current value. |
 | repeat | Repeats _after_ initial iteration or indefinite. |	0 |
 | to | Sequence of comma separated values. Must be specified. |	Current value. |
-| keys | Sequence of comma separated timing keys between 0 and 1. The number of keys should equal the number of to values plus one. | 0, 1 |
+| keys | Sequence of comma separated, increasing timing keys between 0 and 1. The number of keys should equal the number of to values plus one. | 0, 1 |
+| interpolation | Interpolation function to compute intermediate values. One of linear, catmullrom or bezier | linear |
 
+Most of the properties and their default values correspond one to one to ```a-animation``` properties. 
 
+delay: An animation starts after an optional delay. The relative time considered for ```keys``` starts after the delay.
 
+direction: The direction property is ignored when there is more than one `to` values given. To achieve the same effect in this case in a more controlled fashion, it is recommended to explicitly define frames for a full animation (see example above).
+
+dur: The ```dur``` property gives the duration of the total animation from start to finish. The durations of each frame  as defined by the keys sequence is relative to this total duration.
+
+easing: The ```easing``` property default is changed from the ```a-animation``` default value of 'ease' to 'linear' to avoid initial confusion with key defined animation speeds.
+
+to: The ```to``` value can be a single value or a sequence of comma separated values. The value can be a scalar, a vector, a boolean, or a color (see AFRAME animation documentation) and needs to be of the appropriate type for the animated property. In the single value case, the component replicates the ```a-animation``` element's functionality. In the multiple value case, the component interpolates piecewise from value to value (frames), linearly by default. The timing of when each value is reached can be controlled by the keys property.
+
+keys: Each key in the keys is a relative time when a corresponding ```to``` value is reached. A key of 0 corresponds to the start of an animation cycle, and a key of 1 corresponds to the end. The first key (usually 0) is the relative time when the ```from``` value is used in the animation. Subsequent keys then correspond to ```to``` values in sequence. For a well defined animation sequence there should be a key for each ```to ``` value plus one for the initial ```from``` value. If there are more key than ```to``` values, the excess keys are ignored. If there are too few keys, the missing keys are asssumed to be 1. Keys need to be given in monotonically increasing sequence. However, they are sorted according to their numerical value in any case.
+
+interpolation: By default interpolation between frames is linear, eg. a straight line in the case of coordinate interpolation. However, it can be convenient to and TWEEN does allow other types of interpolation ([TWEEN](https://github.com/tweenjs/tween.js/blob/master/docs/user_guide.md#tweening-to-arrays-of-values)). For example, a CatmullRom interpolation will provide smoothed corners in the case of coordinate interpolation. Another potential use is slerp for rotations which is a TODO.
 
 ### Installation
 
