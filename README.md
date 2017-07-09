@@ -3,44 +3,29 @@
 [![Version](http://img.shields.io/npm/v/aframe-keyframes-component.svg?style=flat-square)](https://npmjs.org/package/aframe-keyframes-component)
 [![License](http://img.shields.io/npm/l/aframe-keyframes-component.svg?style=flat-square)](https://npmjs.org/package/aframe-keyframes-component)
 
-key frame animation
-
-For [A-Frame](https://aframe.io).
+[A-Frame](https://aframe.io) animaton with timing keys and frames.
 
 ### Design
 
-Use built-in a-animation node.
+Requirements:
 
-Generate children with delays or use begin events.
+- use built-in a-animation node to avoid additional dependancies.
 
-Could listen to 'animationend' and then emit next begin event.
-
-reuse a single a-animation ?
-
-parent.addlistener('animationend', 
-a-animationnode.setup nextframe toValue duration
-emit('nextFrame')
-)
-
-it looks like it is necessary to clone the animation node, set it up for the next frame, and then replace the current one with the clone.
-Replacing with trigger the next frame, so a begin event is not necessary.
-
+old design:
 https://glitch.com/edit/#!/holy-word?path=index.html:48:29
 
 new design:
 
-- use custom interpolation for tween
-- listen to animationstart
+- use tween target arrays
+- use custom interpolation/easing for tween
+- listen to animationstart emitted by starting a-animation 
 - stop tween immediately, modify tween with to array and custom interpolation function with keys
 - start tween
-https://glitch.com/edit/#!/adorable-knee?path=index.html:52:40
-arrays work !
 
-all of the a-animation attributes as string properties plus
+all of the a-animation attributes as string properties to transfer plus
 - keys: array, monotonically increasing 0 to 1 keys
-- duration: total duration
 - alternatively durations: array
-- values: array of tos
+- to: array of tos
 
 
 ### API
