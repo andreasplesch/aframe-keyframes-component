@@ -11,6 +11,12 @@
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
       </a-assets>
+      
+      <!-- using keyframes-->
+      <a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2"
+        keyframes="attribute: position; dur: 2000; repeat: indefinite; 
+                   to: 0 2.2 -5, 0 2 -5">
+      </a-box>
 
       <a-text value="Hello, A-Frame!" color="#BBB" position="-0.9 0.2 -3" scale="1.5 1.5 1.5">
         <!--a-animation attribute='color' delay='1000' to='#F22' dur='5000'></a-animation-->
