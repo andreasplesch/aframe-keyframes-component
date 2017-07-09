@@ -27,7 +27,50 @@ all of the a-animation attributes as string properties to transfer plus
 - alternatively durations: array
 - to: array of tos
 
+### Summary
 
+The keyframes component animates a target property of another component of the entity, in much the same way as the ```a-animation``` element. In fact, its implementation is based on the ```a-animation``` element. Apart from providing a component interface to animation, the main motivation for the keyframes component is the ability is to define multiple frames for animation sequence where each frame is tied to a timing key. The timing keys define the relative speed of the animation as it progresses from frame to frame. 
+
+Here are a few examples:
+```
+<!-- using a-animation -->
+<a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2">
+  <a-animation attribute="position" dur="2000"
+          to="0 2.2 -5">
+  </a-animation>
+</a-box>
+<!-- using keyframes-->
+<a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2"
+  keyframes="attribute: position; dur: 2000; 
+             to: 0 2.2 -5">
+</a-box>
+<!-- using a-animation -->
+<a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2">
+  <a-animation attribute="position" direction="alternate" dur="2000" repeat="indefinite"
+          to="0 2.2 -5">
+  </a-animation>
+</a-box>
+<!-- using keyframes-->
+<a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2"
+  keyframes="attribute: position; dur: 2000; repeat: indefinite; 
+             to: 0 2.2 -5, 0 2 -5">
+</a-box>
+<!-- using keyframes, first leg faster -->
+<a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2"
+  keyframes="attribute: position; dur: 2000; repeat: indefinite; 
+             to: 0 2.2 -5, 0 2 -5
+             keys: 0, 0.1, 1">
+</a-box>
+<!-- using keyframes, first leg faster, animate two properties -->
+<a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2"
+  keyframes__pos="attribute: position; dur: 2000; repeat: indefinite; 
+             to: 0 2.2 -5, 0 2 -5;
+             keys: 0, 0.1, 1"
+  keyframes__scale="attribute: scale; dur: 2000; repeat: indefinite; 
+             to: 4 3 2, 2 2 2;
+             keys: 0, 0.1, 1">             
+</a-box>
+```
 ### API
 
 
