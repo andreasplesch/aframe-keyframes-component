@@ -16,8 +16,8 @@ https://glitch.com/edit/#!/holy-word?path=index.html:48:29
 
 new design:
 
-- use tween target arrays
-- use custom interpolation/easing for tween
+- use tween target arrays: https://github.com/tweenjs/tween.js/blob/master/docs/user_guide.md#tweening-to-arrays-of-values
+- use custom interpolation/easing for tween: https://github.com/tweenjs/tween.js/issues/352
 - listen to animationstart emitted by starting a-animation 
 - stop tween immediately, modify tween with to array and custom interpolation function with keys
 - start tween
@@ -73,11 +73,25 @@ Here are a few examples:
 ```
 ### API
 
-
+Also see: https://aframe.io/docs/0.6.0/core/animations.html#attributes
 
 | Property | Description | Default Value |
 | -------- | ----------- | ------------- |
-|          |             |               |
+| attribute | Attribute to animate. To specify a component attribute, use componentName.property syntax (e.g., light.intensity).           |     rotation          |
+| begin | Event name to wait on before beginning animation. | None |
+| delay |	Delay (in milliseconds) or event name to wait on before beginning animation. |	0 |
+| direction | Direction of the animation (between from and to). One of alternate, alternateReverse, normal, reverse. Ignored for multiple value to arrays. | normal |
+| dur | Total duration in (milliseconds) of the animation. |	1000 |
+| easing | Easing function of the animation. See Aframe animation documentation. The default here is changed from 'ease' to 'linear'. |	linear |
+| end |	Event name to wait on before stopping animation. | None |
+| fill |	Determines effect of animation when not actively in play. One of backwards, both, forwards, none. |	forwards |
+| from |	Starting value. CUrrently required for color animation. |	Current value. |
+| repeat | Repeats _after_ initial iteration or indefinite. |	0 |
+| to | Sequence of comma separated values. Must be specified. |	Current value. |
+| keys | Sequence of comma separated timing keys between 0 and 1. The number of keys should equal the number of to values plus one. | 0, 1 |
+
+
+
 
 ### Installation
 
