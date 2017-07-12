@@ -94,7 +94,7 @@ AFRAME.registerComponent('keyframes', {
     repeat: {default: 0}, //  Repeat count or indefinite.   0
     to: {default: []}, // must be specified, comma separated
     interpolation: {default: 'linear'}, // kind of interpolation, linear, bezier, catmullrom
-    keys: {default: ['0', '1']} // must be specified, comma separated array of length of to plus one for from value
+    keys: {default: []} // must be specified, comma separated array of length of to plus one for from value, default is set below
   },
 
   /**
@@ -150,23 +150,36 @@ AFRAME.registerComponent('keyframes', {
       ani.setAttribute('to', attrString);
     }
     else {
-      ani.setAttribute('to', type); // will be replaced, hopefully satifisfies a-animation init and start
+      ani.setAttribute('to', type); // will be replaced below, hopefully satifisfies a-animation init and start
     }
-
+    
     // sanitize interpolation
     this.interpolation = INTERPOLATION_FUNCTIONS[data.interpolation] || INTERPOLATION_FUNCTIONS['linear'];
-
+    
     // sanitize keys
     // check length and content
-    this.keys = data.keys.map(parseFloat).map(function(v){return isNaN(v) ? 1:v ;});
-    //sort, deduplicate
+    this.keys = data.keys.map(parseFloat).map(function(v){return v === NaN ? 1:v});
+    //sort, disambiguate duplicates
     if (this.keys.length > 1) {
-      this.keys = this.keys.sort(function cmp(a,b) { return a-b ; }).
-        filter(function(v, i, a){return v !== a[i-1];}) ;
+      //sort in place
+      this.keys.sort(function cmp(a,b) { return a-b });
+      var prev;
+      //modify in place
+      this.keys.map(function dedup(v, i, a) {
+        if (v !== prev) {prev = v; return;}
+        a[i] = v + 4 * Number.EPSILON * i; // just use index as mutltiplier to keep adding a bit
+      })
     }
-    if (this.keys.length === 0) {this.keys = [0, 1] ;}
-
-    if (this.hasAnimationNode) { this.el.replaceChild(ani, this.animation);}
+    /* //default is no keys=regular tween
+    if (this.keys.length == 0) {
+      var n = data.to.length;
+      this.keys[0] = 0;
+      for (var i=1; i <= n; i++) {
+        this.keys.push(i/n); // default keys;
+      };
+    }
+    */
+    if (this.hasAnimationNode) { this.el.replaceChild(ani, this.animation); }
     else {
       this.el.appendChild(ani);
       this.hasAnimationNode = true;
@@ -230,10 +243,13 @@ AFRAME.registerComponent('keyframes', {
     }
     tween.to(to, parseFloat(data.dur));
     tween.interpolation(this.interpolation);
-    //interpolation keys, custom function
-    var parsedEasing = EASING_FUNCTIONS[data.easing];
-    tween.easing(keyedEasing(this.keys), parsedEasing);
-
+    var easing = EASING_FUNCTIONS[data.easing] || EASING_FUNCTIONS['linear']; 
+    //with interpolation keys, custom easing function
+    if (this.keys.length > 0) {
+      easing = keyedEasing(this.keys, easing);
+    }
+    tween.easing(easing);
+    
     tween.start();
 
     // helper
@@ -245,7 +261,7 @@ AFRAME.registerComponent('keyframes', {
       if (t == 'boolean') { return v ? 1 : 0 ;}
       return parseFloat(v.toString()) ; // hopefully never happens
     }
-
+    
     function keyedEasing(keys, easing) {
       //easing is applied on top
       easing = easing || AFRAME.TWEEN.Easing.Linear.None; //perhaps test if actually a number returning function
@@ -264,12 +280,12 @@ AFRAME.registerComponent('keyframes', {
         }
 
         // find interval
-        var right = keys.findIndex(function (key) {return key > k ;}); // could be smarter: start searching from previous
+        var right = keys.findIndex(function (key) {return key > k}); // could be smarter: start searching from previous
         var left = right - 1;
         var f = (k-keys[left])/(keys[right]-keys[left]);
         //the interpolation between left/m, right/m works because tween divides the duration evenly into 1/m wide pieces
         return easing(fn(left/m, right/m, f));
-      };
+      }
     }
 
   },

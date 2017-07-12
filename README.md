@@ -3,7 +3,7 @@
 [![Version](http://img.shields.io/npm/v/aframe-keyframes-component.svg?style=flat-square)](https://npmjs.org/package/aframe-keyframes-component)
 [![License](http://img.shields.io/npm/l/aframe-keyframes-component.svg?style=flat-square)](https://npmjs.org/package/aframe-keyframes-component)
 
-[A-Frame](https://aframe.io) animaton with timing keys and frames.
+[A-Frame](https://aframe.io) animation with multiple frames and timing keys.
 
 ### Design
 
